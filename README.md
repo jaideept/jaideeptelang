@@ -8,7 +8,7 @@ The project has the following goals:
 
 * Support running the Angular project completely separate from the ASP.NET Core Web API if desired (CORS is enabled in the Startup.cs project). See the notes below if you want to use this option.
 
-* Swagger has been implemented in the Startup.cs to provide a clean view of the REST API to provide a better API documentation to the consumer of the REST API.
+* Swagger has been implemented in the Startup.cs to provide a clean view of the REST API to provide a better API documentation to the consumer of the REST API. 
 
 * various security HTTP response headers (X-Xss-Protection, X-Frame-Options, Content-Security-Policy) have been implemented in the Startup.cs to handle few of the OWASP top 10 Vulnerabilities.Dirty, malformed text strings should be used as user-input data to carry out thourough web penetration testing. Source - (https://github.com/minimaxir/big-list-of-naughty-strings). https://securityheaders.com/ can be used to validate the headers in the application hosted over public IP. 
 
@@ -48,9 +48,9 @@ dotnet build -c Debug or dotnet build -c Release
 dotnet watch -p ContactApi/ContactApi.csproj  run
 ```
 
-9. Visit http://localhost:5000 in the browser
+9. Visit http://localhost:5000/swagger/index.html in the browser to see swagger documentation. http://localhost:5000/contact would invoke GetAll end point.
 
-10. An MVC view is serving the Angular application.
+10. visit `http://localhost:4200/`. it would open up the Angular CRUD screen.
 
 11. a postman collection "ContactApi.postman_collection" is available inside ContactApi project to facilitate web api end point testing using Postman. this collection can be further extended with various combintions of input data for POST / PUT methods.
 
