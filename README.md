@@ -10,7 +10,7 @@ The project has the following goals:
 
 * Swagger has been implemented in the Startup.cs to provide a clean view of the REST API to provide a better API documentation to the consumer of the REST API.
 
-* various security HTTP response headers (X-Xss-Protection, X-Frame-Options, Content-Security-Policy) have been implemented in the Startup.cs to handle few of the OWASP top 10 Vulnerabilities.Dirty, malformed text strings should be used as user-input data to carry out thourough web penetration testing. Source - (https://github.com/minimaxir/big-list-of-naughty-strings) 
+* various security HTTP response headers (X-Xss-Protection, X-Frame-Options, Content-Security-Policy) have been implemented in the Startup.cs to handle few of the OWASP top 10 Vulnerabilities.Dirty, malformed text strings should be used as user-input data to carry out thourough web penetration testing. Source - (https://github.com/minimaxir/big-list-of-naughty-strings). https://securityheaders.com/ can be used to validate the headers in the application hosted over public IP. 
 
 * Data access specific logic is encapsulated in the Repository layer of the app. For example, 'ContactRepository' implements an abstract class 'SqlRepository' Other data source for use in near future could be Document DB and XML repositories.
 
@@ -38,13 +38,15 @@ To run the project perform the following steps:
 
 6. Run 'npm install'
 
-7. Run 'ng build --watch' to start the Angular build process and watch for changes. The build process will add the output to the project's 'wwwroot' folder.
+7. Run ng build --prod="true" or ng build --prod. The build command also creates a new folder called dist for distribution. These are the files we can host on a server and our Angular app will load up. (dist/ContactWebAppUI)
 
 8. Open a new command window in the root of the project and run the following commands:
 
+```
 dotnet restore
 dotnet build -c Debug or dotnet build -c Release
 dotnet watch -p ContactApi/ContactApi.csproj  run
+```
 
 9. Visit http://localhost:5000 in the browser
 
