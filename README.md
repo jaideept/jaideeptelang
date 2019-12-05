@@ -1,10 +1,10 @@
-# This repository offers you a Contact demo CRUD application implemented with the Angular CLI and an endpoint using ASP.NET Core Web API.
+# Contact demo CRUD application implemented with the Angular CLI and an endpoint using ASP.NET Core Web API using Dapper ORM.
 
-The project has the following goals:
+The project has the following features:
 
 * Keep the Angular project code completely separate from the ASP.NET Core code to make updates of either technology easier in the future. This was a key consideration when organizing the folders/files in the project.
 
-* Provide a way to serve an Angular application using an MVC view.
+* Dapper ORM has been used in .Net Core Api. Using Dapper, it is very easy to fire a SQL query against database and get the result mapped to C# domain class. Dapper makes use of parameterized queries which help protect against SQL injections.
 
 * Support running the Angular project completely separate from the ASP.NET Core Web API if desired (CORS is enabled in the Startup.cs project). See the notes below if you want to use this option.
 
