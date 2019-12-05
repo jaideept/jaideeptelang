@@ -1,0 +1,67 @@
+<form #form="ngForm" outcomplete="off" (submit)="onSubmit(form)">
+    <input type="hidden" name="Id" [value]="service.formData.Id">
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text bg-white">
+            <i class="fas fa-user-secret" [class.green-icon]="FirstName.valid" [class.red-icon]="FirstName.invalid && FirstName.touched"></i>
+          </div>
+        </div>
+      
+      <input class="form-control" name="FirstName" required #FirstName="ngModel" [(ngModel)]="service.formData.FirstName" placeholder="Please enter First Name">
+    </div>
+  </div>
+  
+  <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text bg-red">
+            <i class="fas fa-user-secret" [class.green-icon]="LastName.valid" [class.red-icon]="LastName.invalid && LastName.touched"></i>
+        </div>
+        </div>
+      
+      <input class="form-control" name="LastName" #LastName="ngModel" required [(ngModel)]="service.formData.LastName" placeholder="Please enter Last Name">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text bg-red">
+          <i class="fas fa-at" [class.green-icon]="Email.valid" [class.red-icon]="Email.invalid && Email.touched"></i>
+        </div>
+      </div>
+    
+      <input class="form-control" name="Email" required #Email="ngModel" [(ngModel)]="service.formData.Email" placeholder="Please Enter Email">
+  </div>
+  </div>
+  
+  
+  <!-- <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text bg-red">
+          <i class="fas fa-phone" [class.green-icon]="PhoneNo.valid" [class.red-icon]="PhoneNo.invalid && PhoneNo.touched"></i>
+        </div>
+      </div>
+    
+    <input class="form-control" required  name="PhoneNo" #PhoneNo="ngModel" [(ngModel)]="service.formData.PhoneNo" placeholder="Please enter Mobile Number">
+  </div>
+</div>
+
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text bg-red">
+          <i class="fas fa-toggle-on" [class.green-icon]="Status.valid" [class.red-icon]="Status.invalid && Status.touched"></i>
+        </div>
+      </div>
+      
+     </div>
+  </div> -->
+  
+  <div class="form-group">
+  <button class="btn btn-success btn-lg btn-block" [disabled]="form.invalid" type="submit"><i class="fas fa-database"></i>&nbsp;&nbsp;Save in Database</button>
+  </div>
+  
+  </form>
