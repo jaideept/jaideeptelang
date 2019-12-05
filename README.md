@@ -27,10 +27,10 @@ To run the project perform the following steps:
 3. Install the Angular CLI:
 
     'npm install -g @angular/cli'
-	
-* Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-# Run 'ng generate component component-name' to generate a new component. You can also use 'ng generate directive|pipe|service|class|guard|interface|enum|module'.
+    Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the   
+    source files.
+    Run 'ng generate component component-name' to generate a new component. You can also use 'ng generate     
+    directive|pipe|service|class|gaurd|interface|enum|module'.
 
 4. Open a command prompt and 'cd' into the project's 'ContactWebAppUI' folder
 
