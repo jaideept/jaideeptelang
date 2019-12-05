@@ -24,7 +24,7 @@ To run the project perform the following steps:
 
 2. Install ASP.NET core 3.0 or higher - https://dot.net
 
-3. Download and configure SQL Server 2017 Express from https://www.microsoft.com/en-in/sql-server/sql-server-editions-express
+3. Download and configure SQL Server 2017 Express from https://www.microsoft.com/en-in/sql-server/sql-server-editions-express and run Contact table creation script from DataAccess\SQL scripts  
 
 4. Install the Angular CLI:
 
