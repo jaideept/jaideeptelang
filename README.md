@@ -24,7 +24,9 @@ To run the project perform the following steps:
 
 2. Install ASP.NET core 3.0 or higher - https://dot.net
 
-3. Install the Angular CLI:
+3. Download and configure SQL Server 2017 Express from https://www.microsoft.com/en-in/sql-server/sql-server-editions-express
+
+4. Install the Angular CLI:
 
     'npm install -g @angular/cli'
     Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the   
@@ -32,22 +34,21 @@ To run the project perform the following steps:
     Run 'ng generate component component-name' to generate a new component. You can also use 'ng generate     
     directive|pipe|service|class|gaurd|interface|enum|module'.
 
-4. Open a command prompt and 'cd' into the project's 'ContactWebAppUI' folder
+5. Open a command prompt and 'cd' into the project's 'ContactWebAppUI' folder
 
-5. Run 'npm install'
+6. Run 'npm install'
 
-6. Run 'ng build --watch' to start the Angular build process and watch for changes. The build process will add the output to the project's 'wwwroot' folder.
+7. Run 'ng build --watch' to start the Angular build process and watch for changes. The build process will add the output to the project's 'wwwroot' folder.
 
-7. Open a new command window in the root of the project and run the following commands:
+8. Open a new command window in the root of the project and run the following commands:
 
 dotnet restore
 dotnet build -c Debug or dotnet build -c Release
 dotnet watch -p ContactApi/ContactApi.csproj  run
 
+9. Visit http://localhost:5000 in the browser
 
-8. Visit http://localhost:5000 in the browser
-
-9. An MVC view is serving the Angular application.
+10. An MVC view is serving the Angular application.
 
 A few additional notes:
 
