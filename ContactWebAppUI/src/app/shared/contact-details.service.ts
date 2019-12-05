@@ -7,7 +7,7 @@ import { HttpClient } from "@angular/common/http";
 })
 export class ContactDetailsService {
 formData:ContactDetails;
-readonly rootURL = 'http://localhost:52444';
+readonly rootURL = 'http://localhost:5000';
 list : ContactDetails[];
 
 constructor(private http: HttpClient) { }
