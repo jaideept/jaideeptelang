@@ -50,6 +50,8 @@ dotnet watch -p ContactApi/ContactApi.csproj  run
 
 10. An MVC view is serving the Angular application.
 
+11. a postman collection "ContactApi.postman_collection" is available inside ContactApi project to facilitate web api end point testing using Postman. this collection can be further extended with various combintions of input data for POST / PUT methods.
+
 A few additional notes:
 
 Due to time constraints, following are the items which i wish could have been implemented:
