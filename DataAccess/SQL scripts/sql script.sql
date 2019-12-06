@@ -5,6 +5,6 @@ CREATE TABLE Contact (
       FirstName varchar(150) NOT NULL,
       LastName varchar(150) NOT NULL,
 	  Email varchar(150) NOT NULL,
-	  Phone varchar(150) NOT NULL,
+	  Phone varchar(10) NOT NULL,
 	  Status bit NOT NULL DEFAULT 1
 )
