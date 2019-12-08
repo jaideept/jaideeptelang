@@ -6,7 +6,9 @@
 		"55783ea4-b3e8-2639-ac15-b7c3c1669b6d",
 		"f72e8c53-0433-74e9-9983-a3c264269a96",
 		"e19ec51b-1df2-18cc-64ea-3ac8947880a8",
-		"a2018aa7-a9aa-0cff-fa6e-58c36bf90680"
+		"a2018aa7-a9aa-0cff-fa6e-58c36bf90680",
+		"7ffb2e1d-b6f5-d579-aa11-88b300c31d2f",
+		"4d21ad66-63a1-bb44-1452-c9990a75ccb9"
 	],
 	"folders": [],
 	"folders_order": [],
@@ -15,10 +17,48 @@
 	"public": false,
 	"requests": [
 		{
+			"id": "4d21ad66-63a1-bb44-1452-c9990a75ccb9",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Local}}/Contact?page=1&pageSize=3",
+			"queryParams": [
+				{
+					"key": "page",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "pageSize",
+					"value": "3",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "64b44d46-48b0-b5e0-4c21-b238d3544da3",
+			"data": null,
+			"dataMode": "params",
+			"name": "GetByPageIndex",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1575844514873,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
 			"id": "55783ea4-b3e8-2639-ac15-b7c3c1669b6d",
 			"headers": "",
 			"headerData": [],
-			"url": "localhost:52444/contact",
+			"url": "{{Local}}/contact",
 			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
@@ -30,8 +70,29 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1575445398881,
+			"time": 1575752390641,
 			"name": "GetAll",
+			"description": "",
+			"collectionId": "64b44d46-48b0-b5e0-4c21-b238d3544da3",
+			"responses": []
+		},
+		{
+			"id": "7ffb2e1d-b6f5-d579-aa11-88b300c31d2f",
+			"headers": "",
+			"headerData": [],
+			"url": "{{Local}}/Contact/555",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1575844494013,
+			"name": "GetById",
 			"description": "",
 			"collectionId": "64b44d46-48b0-b5e0-4c21-b238d3544da3",
 			"responses": []
@@ -40,7 +101,7 @@
 			"id": "a2018aa7-a9aa-0cff-fa6e-58c36bf90680",
 			"headers": "",
 			"headerData": [],
-			"url": "localhost:52444/contact/35",
+			"url": "{{Local}}/contact/35",
 			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
@@ -51,7 +112,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1575566382052,
+			"time": 1575752406670,
 			"name": "Delete",
 			"description": "",
 			"collectionId": "64b44d46-48b0-b5e0-4c21-b238d3544da3",
@@ -69,7 +130,7 @@
 					"enabled": true
 				}
 			],
-			"url": "localhost:52444/contact/3",
+			"url": "{{Local}}/contact/3",
 			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
@@ -80,12 +141,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1575566388291,
+			"time": 1575844489002,
 			"name": "Put",
 			"description": "",
 			"collectionId": "64b44d46-48b0-b5e0-4c21-b238d3544da3",
 			"responses": [],
-			"rawModeData": "{\n\t\"Id\": 3,\n\t\"FirstName\":\"Varsha\",\n\t\"LastName\":\"Goswami\",\n\t\"Email\":\"rini.telang@gmail.com\",\n\t\"Phone\":\"9325737617\",\n\t\"Status\":true\n}"
+			"rawModeData": "{\n\t\"Id\": 3,\n\t\"FirstName\":\"somename\",\n\t\"LastName\":\"somename\",\n\t\"Email\":\"someid@gmail.com\",\n\t\"Phone\":\"3443346666\",\n\t\"Status\":true\n}"
 		},
 		{
 			"id": "f72e8c53-0433-74e9-9983-a3c264269a96",
@@ -98,7 +159,7 @@
 					"enabled": true
 				}
 			],
-			"url": "localhost:52444/contact",
+			"url": "{{Local}}/contact",
 			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
@@ -109,12 +170,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1575566347273,
+			"time": 1575844442624,
 			"name": "Post",
 			"description": "",
 			"collectionId": "64b44d46-48b0-b5e0-4c21-b238d3544da3",
 			"responses": [],
-			"rawModeData": "{\n\t\"FirstName\":\"Mike\",\n\t\"LastName\":\"Anderson\",\n\t\"Email\":\"mikeanderson@gmail.com\",\n\t\"Phone\":\"9089087654\",\n\t\"Status\":true\n}\n"
+			"rawModeData": "{\n\t\"FirstName\":\"alex\",\n\t\"LastName\":\"lancer\",\n\t\"Email\":\"alex@gmail.com\",\n\t\"Phone\":\"5646442566\",\n\t\"Status\":true\n}\n"
 		}
 	]
 }
