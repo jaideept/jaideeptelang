@@ -1,4 +1,4 @@
-﻿namespace ContactApi
+namespace ContactApi.Models
 {
     public abstract class BaseModel
     {
