@@ -1,12 +1,14 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using DataAccess;
+using ContactApi.Models;
 
-namespace ContactApi
+namespace ContactApi.Repository
 {
     public class ContactRepository : SqlRepository<Contact>, IContactRepository
     {
@@ -32,6 +34,21 @@ namespace ContactApi
             }
         }
 
+        public async Task<IEnumerable<Contact>> GetByPageIndex<Contact>(int page, int pageSize)
+        {
+            using (var conn = GetOpenConnection())
+            {
+                var sql = @"SELECT * FROM Contact ORDER BY Id OFFSET((@PageIndex-1)*@PageSize) ROWS
+	                    FETCH NEXT @PageSize ROWS ONLY;";
+
+                var param = new DynamicParameters();
+                param.Add("@PageIndex", page);
+                param.Add("@PageSize", pageSize);
+                var list = await conn.QueryAsync<Contact>(sql, param, commandType: CommandType.Text);
+                return list;
+            }
+        }
+
         public override async Task<Contact> FindAsync(int id)
         {
             using (var conn = GetOpenConnection())
@@ -43,26 +60,23 @@ namespace ContactApi
             }
         }
 
-        public override async Task<int> InsertAsync(Contact entity)
+        public override async Task<Contact> InsertAsync(Contact entity)
         {
-            var inserted = 0;
+            StringBuilder sql = new StringBuilder();
+            int newContactId;
 
             using (var conn = GetOpenConnection())
             {
-                var sql = "INSERT INTO Contact(FirstName, LastName, Email, Phone, Status) "
-                    + "VALUES (@FirstName, @LastName, @Email, @Phone, @Status)";
+                var sqlStatement = @"INSERT INTO Contact(FirstName, LastName, Email, Phone, Status) 
+                    VALUES (@FirstName, @LastName, @Email, @Phone, @Status);
+                    SELECT CAST(SCOPE_IDENTITY() as int)";
 
-                var parameters = new DynamicParameters();
-                parameters.Add("@FirstName", entity.FirstName, System.Data.DbType.String);
-                parameters.Add("@LastName", entity.LastName, System.Data.DbType.String);
-                parameters.Add("@Email", entity.Email, System.Data.DbType.String);
-                parameters.Add("@Phone", entity.Phone, System.Data.DbType.String);
-                parameters.Add("@Status", entity.Status, System.Data.DbType.Boolean);
+                newContactId = await conn.ExecuteScalarAsync<int>(sqlStatement, entity);
 
-                inserted += await conn.ExecuteAsync(sql, parameters);
+                entity.Id = newContactId;
             }
 
-            return inserted;
+            return entity;
         }
 
         public override async void UpdateAsync(Contact entityToUpdate)
@@ -107,7 +121,7 @@ namespace ContactApi
 
                 sql = sql.TrimEnd(',');
 
-                sql += " WHERE Id=@Id";
+                sql += " WHERE Id = @Id";
                 parameters.Add("@Id", entityToUpdate.Id, DbType.Int32);
 
                 await conn.QueryAsync(sql, parameters);
