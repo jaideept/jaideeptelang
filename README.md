@@ -6,6 +6,13 @@ The project has the following features:
 
 * Dapper ORM has been used in .Net Core Api. Using Dapper, it is very easy to fire a SQL query against database and get the result mapped to C# domain class. Dapper makes use of parameterized queries which help protect against SQL injections.
 
+* automatic model validation and 400 response. With ASP.NET Core 2.1, ASP.NET Core 2.1 introduces a new [ApiController] attribute that will trigger automatic model validation and 400 response.Consequently, the following code is unnecessary in an action method:
+
+if (!ModelState.IsValid)
+{
+    return BadRequest(ModelState);
+}
+
 * Support running the Angular project completely separate from the ASP.NET Core Web API if desired (CORS is enabled in the Startup.cs project). See the notes below if you want to use this option.
 
 * Swagger has been implemented in the Startup.cs to provide a clean view of the REST API to provide a better API documentation to the consumer of the REST API. 
