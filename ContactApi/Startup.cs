@@ -73,8 +73,10 @@ namespace ContactApi
 
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
             }
+            
+            app.UseMiddleware<ExceptionsHandlingMiddleware>();
 
             app.UseRouting();
 
