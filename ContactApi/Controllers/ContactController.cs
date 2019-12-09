@@ -1,7 +1,10 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System;
+using ContactApi.Repository;
+using ContactApi.Models;
+using System.Collections.Generic;
 
 namespace ContactApi.Controllers
 {
@@ -29,20 +32,48 @@ namespace ContactApi.Controllers
         }
 
         /// <summary>
+        /// Get contacts with paging
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("{page}/{pageSize}")]
+        public async Task<string> Get(int page = 1, int pageSize = 25)
+        {
+            var contacts = await _contactRepo.GetByPageIndex<Contact>(page, pageSize);
+
+            return Newtonsoft.Json.JsonConvert.SerializeObject(contacts);
+        }
+
+        /// <summary>
+        /// Get Contact By Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            var contact = await _contactRepo.FindAsync(id);
+
+            if (contact == null)
+            {
+                return NotFound(new { message = "Contact not found" });
+            }
+
+            return Ok(contact);
+        }
+
+        /// <summary>
         /// Add a new contact
         /// </summary>
         /// <param name="contact"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Create(Contact contact)
+        public async Task<IActionResult> Create(Contact contact)
         {
-            _contactRepo.InsertAsync(contact);
-           
-            //return StatusCode(201, new { contact });
-            //return 201 Created HTTP status code. The response includes the newly created item in the body 
-            //and its URL in the Location HTTP header
-            var resourceUrl = Path.Combine(Request.Path.ToString(), contact.Id.ToString());
-            return Created(resourceUrl, contact);
+            var contactInserted = await _contactRepo.InsertAsync(contact);
+
+            //in a RESTful API a POST should return a 201 Created response, 
+            //with a Location header pointing to the url for the newly created response
+            return CreatedAtAction(nameof(Get), new { id = contactInserted.Id }, contactInserted);
         }
 
         /// <summary>
@@ -54,11 +85,6 @@ namespace ContactApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, Contact contact)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             if (id != contact.Id)
             {
                 return BadRequest();
@@ -68,7 +94,7 @@ namespace ContactApi.Controllers
 
             if (existingContact == null)
             {
-                return BadRequest("Cannot update a non existing contact.");
+                return BadRequest(new { message = "Cannot update a non existing contact." });
             }
             else
                 _contactRepo.UpdateAsync(contact);
@@ -89,7 +115,7 @@ namespace ContactApi.Controllers
             //If contact doesn't exist, a 404 Not Found HTTP status code is returned
             if (existingContact == null)
             {
-                return NotFound();
+                return NotFound(new { message = "Contact not found" });
             }
             else
             {
