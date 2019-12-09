@@ -8,10 +8,12 @@ The project has the following features:
 
 * automatic model validation and 400 response. With ASP.NET Core 2.1, ASP.NET Core 2.1 introduces a new [ApiController] attribute that will trigger automatic model validation and 400 response.Consequently, the following code is unnecessary in an action method:
 
+```
 if (!ModelState.IsValid)
 {
     return BadRequest(ModelState);
 }
+```
 
 * Support running the Angular project completely separate from the ASP.NET Core Web API if desired (CORS is enabled in the Startup.cs project). See the notes below if you want to use this option.
 
