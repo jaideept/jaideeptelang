@@ -26,10 +26,10 @@ namespace DataAccess
             return DbConnectionFactory.GetDbConnection(_dbType, _connectionString);
         }
 
-        public abstract void DeleteAsync(int id);
+        public abstract Task DeleteAsync(int id);
         public abstract Task<IEnumerable<TEntity>> GetAllAsync();
         public abstract Task<TEntity> FindAsync(int id);
-        public abstract Task<int> InsertAsync(TEntity entity);
+        public abstract Task<TEntity> InsertAsync(TEntity entity);
         public abstract void UpdateAsync(TEntity entityToUpdate);
     }
 }

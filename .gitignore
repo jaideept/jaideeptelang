@@ -1,0 +1,18 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/ContactApi/bin/Debug/netcoreapp3.0
+/ContactApi/obj
+/DataAccess/obj/Debug
+/DataAccess/bin/Debug
+/packages
+/ContactApiTests/bin/Debug/netcoreapp3.0
+/ContactApiTests/obj/Release/netcoreapp3.0
+/ContactApiTests/obj/project.assets.json
+/ContactApiTests/obj/Debug/netcoreapp3.0
+/ContactApiTests/obj/ContactApiTests.csproj.nuget.g.targets
+/ContactApiTests/obj/ContactApiTests.csproj.nuget.g.props
+/ContactApiTests/obj/ContactApiTests.csproj.nuget.dgspec.json
+/ContactApiTests/obj/ContactApiTests.csproj.nuget.cache
+/.vs

@@ -10,8 +10,8 @@ namespace DataAccess
         IDbConnection GetOpenConnection();
         Task<IEnumerable<TEntity>> GetAllAsync();
         Task<TEntity> FindAsync(int id);
-        Task<int> InsertAsync(TEntity entity);
-        void DeleteAsync(int id);
+        Task<TEntity> InsertAsync(TEntity entity);
+        Task DeleteAsync(int id);
         void UpdateAsync(TEntity entityToUpdate);
     }
 }

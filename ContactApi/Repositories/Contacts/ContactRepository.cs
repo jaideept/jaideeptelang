@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -14,7 +14,7 @@ namespace ContactApi.Repository
     {
         public ContactRepository(string connectionString) : base(connectionString) { }
 
-        public override async void DeleteAsync(int id)
+        public override async Task DeleteAsync(int id)
         {
             using (var conn = GetOpenConnection())
             {

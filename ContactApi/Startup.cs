@@ -1,14 +1,13 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using ContactApi.Repository;
+using ContactApi.Exceptions;
+using ContactApi.Extensions;
 
 namespace ContactApi
 {
@@ -21,11 +20,16 @@ namespace ContactApi
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        // This method gets called by the runtime. Use this method to add services to the container.(for e.g., DI)
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            // profiling
+            services.AddMiniProfiler(options =>
+               options.RouteBasePath = "/profiler"
+            );
+            services.AddControllers().AddNewtonsoftJson();
             services.AddCors();
+            services.AddResponseCaching();
             //ContactRepository is instantiated using dependency injection
             services.AddTransient<IContactRepository>(x => new ContactRepository(Configuration.GetConnectionString("Default")));
             services.AddMvc()
@@ -36,13 +40,18 @@ namespace ContactApi
 
             services.AddSwaggerGen(c => 
             { 
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Contact API", Description = "Contact API - with swagger" }); 
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Contacts API", Description = "Contact API - with swagger" }); 
             });
+
+            //registering the health check services 
+            services.AddHealthChecks();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // profiling, url to see last profile check: http://localhost:xxxxx/profiler/results
+            app.UseMiniProfiler();
             //app.UseCors("AllowMyOrigin");
             //enable CORS
             app.UseCors(options =>
@@ -50,7 +59,7 @@ namespace ContactApi
              .AllowAnyMethod()
              .AllowAnyHeader());
 
-            //Security headers 
+            //Adding standard security headers to the response
             //ToDo - can use NWebSec library instead of applying security heasders in below manner
 
             app.Use(async (context, next) =>
@@ -70,13 +79,20 @@ namespace ContactApi
                 await next();
             });
 
-
             if (env.IsDevelopment())
             {
-                //app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage();
+                app.UseExceptionsHandlingMiddleware();
             }
-            
-            app.UseMiddleware<ExceptionsHandlingMiddleware>();
+            else
+            {
+                //include ExceptionHandling middleware in the ASP.NET Core pipeline
+                app.UseExceptionsHandlingMiddleware();
+                app.UseExceptionHandler();
+            }
+
+            //app.UseMiddleware<ExceptionsHandlingMiddleware>();
+
 
             app.UseRouting();
 
