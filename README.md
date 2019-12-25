@@ -21,6 +21,8 @@ The project has the following features:
 
 * Handled Errors Globally with the Built-In Middleware (UseExceptionHandler)
 
+* JWT based authentication and role based authorization
+
 * various security HTTP response headers (X-Xss-Protection, X-Frame-Options, Content-Security-Policy) have been implemented in the Startup.cs to handle few of the OWASP top 10 Vulnerabilities.Dirty, malformed text strings should be used as user-input data to carry out thourough web penetration testing. Source - (https://github.com/minimaxir/big-list-of-naughty-strings). https://securityheaders.com/ can be used to validate the headers in the application hosted over public IP. 
 
 * Data access specific logic is encapsulated in the Repository layer of the app. For example, 'ContactRepository' implements an abstract class 'SqlRepository' Other data source for use in near future could be Document DB and XML repositories.
