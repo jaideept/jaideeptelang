@@ -62,18 +62,6 @@ namespace ContactApi.Controllers
         }
 
         /// <summary>
-        /// Get contacts with paging
-        /// </summary>
-        /// <returns></returns>
-        //[HttpGet("{page}/{pageSize}")]
-        //public async Task<string> Get(int page = 1, int pageSize = 25)
-        //{
-        //    var contacts = await _contactRepo.GetByPageIndex<Contact>(page, pageSize);
-
-        //    return Newtonsoft.Json.JsonConvert.SerializeObject(contacts);
-        //}
-
-        /// <summary>
         /// Get Contact By Id
         /// with return type as ActionResult<T>,
         /// if all goes well you will be getting a Contact object in the end without the need to wrap the result in an OK.
