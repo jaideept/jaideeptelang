@@ -91,32 +91,32 @@ namespace ContactApi.Repository
                 var parameters = new DynamicParameters();
                 if (existingEntity.FirstName != entityToUpdate.FirstName)
                 {
-                    sql += "FirstName=@FirstName,";
+                    sql += "FirstName = @FirstName,";
                     parameters.Add("@FirstName", entityToUpdate.FirstName, DbType.String);
                 }
 
                 if (existingEntity.LastName != entityToUpdate.LastName)
                 {
-                    sql += "LastName=@LastName,";
+                    sql += "LastName = @LastName,";
                     parameters.Add("@LastName", entityToUpdate.LastName, DbType.String);
                 }
 
                 if (existingEntity.Email != entityToUpdate.Email)
                 {
-                    sql += "Email=@Email,";
+                    sql += "Email = @Email,";
                     parameters.Add("@Email", entityToUpdate.Email, DbType.String);
                 }
 
                 if (existingEntity.Phone != entityToUpdate.Phone)
                 {
-                    sql += "Phone=@Phone,";
+                    sql += "Phone = @Phone,";
                     parameters.Add("@Phone", entityToUpdate.Phone, DbType.String);
                 }
 
                 if (existingEntity.Status != entityToUpdate.Status)
                 {
-                    sql += "Status=@Status,";
-                    parameters.Add("@FirstName", entityToUpdate.Status, DbType.Boolean);
+                    sql += "Status = @Status,";
+                    parameters.Add("@Status", entityToUpdate.Status, DbType.Boolean);
                 }
 
                 sql = sql.TrimEnd(',');

@@ -9,11 +9,12 @@ using Microsoft.Extensions.Logging;
 using System.Linq;
 using Microsoft.AspNetCore.JsonPatch;
 using StackExchange.Profiling;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ContactApi.Controllers
 {
+    [Authorize]
     [ApiController]
-    //[Route("[controller]")]
     [Route("api/[controller]")]
     public class ContactController : ControllerBase
     {
@@ -28,20 +29,10 @@ namespace ContactApi.Controllers
 
 
         /// <summary>
-        /// Get all contacts
-        /// </summary>
-        /// <returns></returns>
-        //[HttpGet]
-        //public async Task<string> Get()
-        //{
-        //    var contacts = await _contactRepo.GetAllAsync();
-        //    return Newtonsoft.Json.JsonConvert.SerializeObject(contacts);
-        //}
-
-        /// <summary>
         /// Get all contacts in paged result
         /// </summary>
         /// <returns></returns>
+        [Authorize(Roles = Role.Admin)]
         [HttpGet]
         public async Task<ActionResult<PagedCollectionResponse<Contact>>> Get([FromQuery] FilterModel filter)
         {
@@ -74,13 +65,13 @@ namespace ContactApi.Controllers
         /// Get contacts with paging
         /// </summary>
         /// <returns></returns>
-        [HttpGet("{page}/{pageSize}")]
-        public async Task<string> Get(int page = 1, int pageSize = 25)
-        {
-            var contacts = await _contactRepo.GetByPageIndex<Contact>(page, pageSize);
+        //[HttpGet("{page}/{pageSize}")]
+        //public async Task<string> Get(int page = 1, int pageSize = 25)
+        //{
+        //    var contacts = await _contactRepo.GetByPageIndex<Contact>(page, pageSize);
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(contacts);
-        }
+        //    return Newtonsoft.Json.JsonConvert.SerializeObject(contacts);
+        //}
 
         /// <summary>
         /// Get Contact By Id
@@ -204,7 +195,7 @@ namespace ContactApi.Controllers
             }
             else
             {
-                _contactRepo.DeleteAsync(id);
+                await _contactRepo.DeleteAsync(id);
                 return NoContent();
             }
         }

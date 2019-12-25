@@ -6,8 +6,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ContactApi.Repository;
-using ContactApi.Exceptions;
 using ContactApi.Extensions;
+using ContactApi.Helpers;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using ContactApi.Services;
 
 namespace ContactApi
 {
@@ -29,6 +33,34 @@ namespace ContactApi
             );
             services.AddControllers().AddNewtonsoftJson();
             services.AddCors();
+
+            // configure strongly typed settings objects
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+
+            // configure jwt authentication
+            var appSettings = appSettingsSection.Get<AppSettings>();
+            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
+            services.AddScoped<IUserService, UserService>();
+
             services.AddResponseCaching();
             //ContactRepository is instantiated using dependency injection
             services.AddTransient<IContactRepository>(x => new ContactRepository(Configuration.GetConnectionString("Default")));
@@ -79,6 +111,10 @@ namespace ContactApi
                 await next();
             });
 
+            // The Stackify middleware needs to come before any exception handling middleware and the MVC middleware
+            //app.UseMiddleware<StackifyMiddleware.RequestTracerMiddleware>();
+            //app.UseMiddleware<SerilogRequestLogger>();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -96,6 +132,7 @@ namespace ContactApi
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

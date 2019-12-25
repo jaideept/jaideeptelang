@@ -1,4 +1,5 @@
-﻿using ContactApi.Middleware;
+﻿using ContactApi.Exceptions;
+using ContactApi.Middleware;
 using Microsoft.AspNetCore.Builder;
 
 namespace ContactApi.Extensions
